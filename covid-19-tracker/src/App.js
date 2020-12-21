@@ -2,13 +2,14 @@ import React, { useEffect, useState } from "react";
 import { MenuItem, FormControl, Select, Card, CardContent } from "@material-ui/core";
 import InfoBox from './InfoBox';
 import Map from "./Map";
-
 import './App.css';
+import Table from "./Table";
 
 function App() {
   const [countries, setCountries] = useState([]);
   const [country, setCountry] = useState('worldwide'); //to set default frist option to worldwide
   const [countryInfo, setCountryInfo] = useState({});
+  const [tableData, setTablesData] = useState([]);
 
 
     useEffect(() => {
@@ -19,15 +20,13 @@ function App() {
       });
     }, []);
 
-    // STATE [] = dis is how to write a variable in react <<<<<<
-
-    // https://disease.sh/v3/covid-19/countries
-
-    //USEEFFECT= Use to pull data from api. runs a piece of code based on given condition
+                // STATE [] = dis is how to write a variable in react <<<<<<
+                // https://disease.sh/v3/covid-19/countries
+                //USEEFFECT= Use to pull data from api. runs a piece of code based on given condition
 
     useEffect(() => {
-      //note when u live [] blank the code inside here will run only once whn d components loads ie if u av data in the countries varaible when there is changes in the data it wil only run once 
-      // we need to run a piece of code -> async -> sends a request to server and wait for it and fo somtin wit d info. how to use is below 
+                //note when u live [] blank the code inside here will run only once whn d components loads ie if u av data in the countries varaible when there is changes in the data it wil only run once 
+               // we need to run a piece of code -> async -> sends a request to server and wait for it and fo somtin wit d info. how to use is below 
 
       const getCountriesData= async () => {
         await fetch("https://disease.sh/v3/covid-19/countries")
@@ -39,6 +38,7 @@ function App() {
               value: country.countryInfo.iso2 // UK, USA, FRA
           }));
 
+          setTablesData(data);
           setCountries(countries);
 
         });
@@ -51,7 +51,7 @@ function App() {
       const countryCode = event.target.value; 
       setCountry(countryCode); 
       
-      // to set the country which is selected on dispaly in the menu
+                // to set the country which is selected on dispaly in the menu
 
       const url = 
         countryCode === "worldwide" 
@@ -63,9 +63,9 @@ function App() {
            .then(data => {
               setCountry(countryCode); 
               
-              // setcointry brings the response for the country code then the nxt line stores it 
+                        // setcointry brings the response for the country code then the nxt line stores it 
 
-              //storing all data from the contry response
+                        //storing all data from the contry response
               setCountryInfo(data); //this will store d contry info into a variable
 
            });
@@ -80,56 +80,41 @@ function App() {
           <h1> COVID-19 TRACKER</h1>
             <FormControl className="app_dropdown">
                <Select variant="outlined" onChange={onCountryChange} value={country}>
-                <MenuItem value="worldwide">Worldwide</MenuItem>
+                    <MenuItem value="worldwide">Worldwide</MenuItem>
 
-                   {/*Loop through all the countries and how a drop downlist of the options */}
+                        {/*Loop through all the countries and how a drop downlist of the options */}
 
-                     {countries.map((country ) => (
-                  <MenuItem value={country.value}>{country.name}</MenuItem>
-                ))}
+                        {countries.map((country ) => (
+                      <MenuItem value={country.value}>{country.name}</MenuItem>
+                     ))}               
+                </Select>
 
+            </FormControl>
 
-            {/*<MenuItem value="worldwide">worldwide</MenuItem>
-            <MenuItem value="worldwide">option1</MenuItem>
-            <MenuItem value="worldwide">option2</MenuItem>
-            <MenuItem value="worldwide">option3</MenuItem>*/}
-
-          </Select>
-
-        </FormControl>
-
-      </div>
+        </div>
       
 
       
 
-      <div className="app_stats">
-        <InfoBox title="Coronavirus cases" cases={countryInfo.todayCases} total={countryInfo.cases}/>
+          <div className="app_stats">
+            <InfoBox title="Coronavirus cases" cases={countryInfo.todayCases} total={countryInfo.cases}/>
+            <InfoBox title="Recovered" cases={countryInfo.todayRecovered} total={countryInfo.recovered}/>
+            <InfoBox title="Deaths" cases={countryInfo.todayDeaths} total={countryInfo.deaths}/>
+          </div>
 
-        <InfoBox title="Recovered" cases={countryInfo.todayRecovered} total={countryInfo.recovered}/>
-
-        <InfoBox title="Deaths" cases={countryInfo.todayDeaths} total={countryInfo.deaths}/>
-
-            {/*Info box1  title="Coronavirus cases"  */}
-            {/*Info box2  title="Coronavirus recoveries" */}
-            {/*Info box3 */}
-
+              {/*Map */}
+              <Map />
       </div>
-
-
-      {/*Map */}
-      <Map />
-
-      </div>
-      <Card className="app_right">
+      
+  <Card className="app_right">
         <CardContent>
           <h3>Live Cases by Country</h3>
-              {/*Table */}
+            <Table countries={tableData}></Table>
           <h3>Worldwide new cases</h3>
               {/*Graph */}
         </CardContent>
       </Card>
-    </div>
+  </div>
   );
 }
 
