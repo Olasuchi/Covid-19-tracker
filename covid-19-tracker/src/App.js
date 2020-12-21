@@ -9,6 +9,7 @@ import './App.css';
 
 function App() {
   const [countries, setCountries] = useState([]);
+  const [country, setCountry] = useState('worldwide'); //to set default frist option to worldwide
 
     // STATE [] = dis is how to write a variable in react <<<<<<
 
@@ -37,14 +38,23 @@ function App() {
 
       getCountriesData();
     }, []);
-        
+
+    const onCountryChange = async (event) => {
+      const countryCode = event.target.value;      //dis will select the value 
+
+      console.log("bless >>>>>", countryCode);
+
+      setCountry(countryCode); // to set the country which is selected on dispaly in the menu
+
+    }
 
   return (
     <div className="app">
       <div className="app_header">
       <h1> COVID-19 TRACKER</h1>
         <FormControl className="app_dropdown">
-          <Select variant="outlined" value="abc">
+          <Select variant="outlined" onChange={onCountryChange} value={country}>
+            <MenuItem value="worldwide">Worldwide</MenuItem>
 
             {/*Loop through all the countries and how a drop downlist of the options */}
 
