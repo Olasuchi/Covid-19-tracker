@@ -42,8 +42,6 @@ function App() {
     const onCountryChange = async (event) => {
       const countryCode = event.target.value;      //dis will select the value 
 
-      console.log("bless >>>>>", countryCode);
-
       setCountry(countryCode); // to set the country which is selected on dispaly in the menu
 
     }
@@ -75,12 +73,17 @@ function App() {
       </div>
       
 
-      {/*Header */}
-      {/*title + select input dropdown field */}
+      
 
-      {/*Info box1 */}
-      {/*Info box2 */}
-      {/*Info box3 */}
+      <div className="app_stats">
+            {/*Info box1  title="Coronavirus cases"  */}
+            {/*Info box2  title="Coronavirus recoveries" */}
+            {/*Info box3 */}
+
+
+      </div>
+
+      
 
       {/*table */}
       {/*Graph */}
