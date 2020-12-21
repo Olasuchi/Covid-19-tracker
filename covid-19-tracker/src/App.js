@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   MenuItem,
   FormControl,
@@ -8,16 +8,29 @@ import {
 import './App.css';
 
 function App() {
+  const [countries, setCountries] = useState(['USA', 'NIGERIA', 'GERMANY']);
+
+    // STATE [] = dis is how to write a variable in react <<<<<<
+
+
   return (
     <div className="app">
       <div className="app_header">
       <h1> COVID-19 TRACKER</h1>
         <FormControl className="app_dropdown">
           <Select variant="outlined" value="abc">
-            <MenuItem value="worldwide">worldwide</MenuItem>
+
+            {/*Loop through all the countries and how a drop downlist of the options */}
+
+                {countries.map((country ) => (
+                  <MenuItem value={country}>{country}</MenuItem>
+                ))}
+
+
+            {/*<MenuItem value="worldwide">worldwide</MenuItem>
             <MenuItem value="worldwide">option1</MenuItem>
             <MenuItem value="worldwide">option2</MenuItem>
-            <MenuItem value="worldwide">option3</MenuItem>
+            <MenuItem value="worldwide">option3</MenuItem>*/}
 
           </Select>
 
