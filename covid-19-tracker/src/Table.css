@@ -5,6 +5,18 @@
     color: #6a5d5d;
 }
 
+/*   to create space between the country and cases*/
+.table tr{
+    display: flex;
+    justify-content: space-between;
+
+}
+
+/* to give the data a little withing each other */
+.table td{
+    padding: 0.5rem;
+}
+
 .table tr:nth-of-type(odd) {
     background-color: #f3f2f8;
 }
