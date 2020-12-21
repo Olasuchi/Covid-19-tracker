@@ -8,6 +8,16 @@ import './App.css';
 function App() {
   const [countries, setCountries] = useState([]);
   const [country, setCountry] = useState('worldwide'); //to set default frist option to worldwide
+  const [countryInfo, setCountryInfo] = useState({});
+
+
+    useEffect(() => {
+      fetch ("https://disease.sh/v3/covid-19/all")
+      .then (response => response.json())
+      .then (data => {
+        setCountryInfo(data);
+      });
+    }, []);
 
     // STATE [] = dis is how to write a variable in react <<<<<<
 
@@ -38,11 +48,30 @@ function App() {
     }, []);
 
     const onCountryChange = async (event) => {
-      const countryCode = event.target.value;      //dis will select the value 
+      const countryCode = event.target.value; 
+      setCountry(countryCode); 
+      
+      // to set the country which is selected on dispaly in the menu
 
-      setCountry(countryCode); // to set the country which is selected on dispaly in the menu
+      const url = 
+        countryCode === "worldwide" 
+          ? "https://disease.sh/v3/covid-19/all"
+          : `https://disease.sh/v3/covid-19/countries/${countryCode}`;    //this two above will iterate if the countrycode is worldwide pick first one and if otherwise the next one
 
-    }
+           await fetch(url)
+           .then (response => response.json())
+           .then(data => {
+              setCountry(countryCode); 
+              
+              // setcointry brings the response for the country code then the nxt line stores it 
+
+              //storing all data from the contry response
+              setCountryInfo(data); //this will store d contry info into a variable
+
+           });
+    };
+
+      console.log("COUNTRY INFO >>>", countryInfo); 
 
   return (
     <div className="app">
@@ -75,11 +104,11 @@ function App() {
       
 
       <div className="app_stats">
-        <InfoBox title="Coronavirus cases" cases={123} total={2000}/>
+        <InfoBox title="Coronavirus cases" cases={countryInfo.todayCases} total={countryInfo.cases}/>
 
-        <InfoBox title="Recovered" cases={1234} total={3000}/>
+        <InfoBox title="Recovered" cases={countryInfo.todayRecovered} total={countryInfo.recovered}/>
 
-        <InfoBox title="Deaths" cases={12345} total={4000}/>
+        <InfoBox title="Deaths" cases={countryInfo.todayDeaths} total={countryInfo.deaths}/>
 
             {/*Info box1  title="Coronavirus cases"  */}
             {/*Info box2  title="Coronavirus recoveries" */}
