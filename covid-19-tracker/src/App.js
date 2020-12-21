@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   MenuItem,
   FormControl,
@@ -8,10 +8,36 @@ import {
 import './App.css';
 
 function App() {
-  const [countries, setCountries] = useState(['USA', 'NIGERIA', 'GERMANY']);
+  const [countries, setCountries] = useState([]);
 
     // STATE [] = dis is how to write a variable in react <<<<<<
 
+    // https://disease.sh/v3/covid-19/countries
+
+    //USEEFFECT= Use to pull data from api. runs a piece of code based on given condition
+
+    useEffect(() => {
+      //note when u live [] blank the code inside here will run only once whn d components loads ie if u av data in the countries varaible when there is changes in the data it wil only run once 
+      // we need to run a piece of code -> async -> sends a request to server and wait for it and fo somtin wit d info. how to use is below 
+
+      const getCountriesData= async () => {
+        await fetch("https://disease.sh/v3/covid-19/countries")
+        .then((response) => response.json())
+        .then ((data) => {
+          const countries = data.map ((country) => (
+            {
+              name: country.country, //Unites States, United Kingdom
+              value: country.countryInfo.iso2 // UK, USA, FRA
+          }));
+
+          setCountries(countries);
+
+        });
+      };
+
+      getCountriesData();
+    }, []);
+        
 
   return (
     <div className="app">
@@ -23,7 +49,7 @@ function App() {
             {/*Loop through all the countries and how a drop downlist of the options */}
 
                 {countries.map((country ) => (
-                  <MenuItem value={country}>{country}</MenuItem>
+                  <MenuItem value={country.value}>{country.name}</MenuItem>
                 ))}
 
 
