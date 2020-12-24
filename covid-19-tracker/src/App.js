@@ -11,13 +11,14 @@ import numeral from "numeral";
 
 function App() {
   const [countries, setCountries] = useState([]);
-  const [country, setCountry] = useState('worldwide'); //to set default frist option to worldwide
+  const [country, setInputCountry] = useState('worldwide'); //to set default frist option to worldwide
   const [countryInfo, setCountryInfo] = useState({});
   const [tableData, setTablesData] = useState([]);
+  const [mapCountries, setMapCountries] = useState([]);
   const [casesType, setCasesType] = useState("cases");
   const [mapCenter, setMapCenter] = useState({ lat: 34.80746, lng: -40.4796 }); /* the long and lat of the center of the world so when the app loadsit gos to center  */
   const [mapZoom, setMapZoom] = useState(3); /**  to zoom to the center*/
-  const [mapCountries, setMapCountries] = useState([]);
+  
 
 
     useEffect(() => {
@@ -56,10 +57,10 @@ function App() {
 
       getCountriesData();
     }, []);
+    console.log(casesType)
 
     const onCountryChange = async (event) => {
       const countryCode = event.target.value; 
-      setCountry(countryCode); 
       
                 // to set the country which is selected on dispaly in the menu
 
@@ -71,7 +72,7 @@ function App() {
            await fetch(url)
            .then (response => response.json())
            .then(data => {
-              setCountry(countryCode); 
+              setInputCountry (countryCode);
               
                         // setcointry brings the response for the country code then the nxt line stores it 
 
@@ -82,8 +83,6 @@ function App() {
               setMapZoom(4);
            });
     };
-
-      console.log("COUNTRY INFO >>>", countryInfo); 
 
   return (
     <div className="app">
@@ -117,7 +116,7 @@ function App() {
                           
           <Map
           countries={mapCountries}
-          casesType={casesType}
+          casesType={casesType}  //to change the color of cases eg red to green if recovered 
           center={mapCenter}          
           zoom={mapZoom}
         />
@@ -130,7 +129,7 @@ function App() {
           <h3>Live Cases by Country</h3>
             <Table countries={tableData}></Table>
           <h3>Worldwide new cases</h3>
-                          <LineGraph />
+          <LineGraph casesType={casesType} />
             
         </CardContent>
       </Card>
