@@ -7,15 +7,17 @@ import Table from "./Table";
 import { sortData } from "./util";
 import LineGraph from "./LineGraph"; 
 import "leaflet/dist/leaflet.css";
+import numeral from "numeral";
 
 function App() {
   const [countries, setCountries] = useState([]);
   const [country, setCountry] = useState('worldwide'); //to set default frist option to worldwide
   const [countryInfo, setCountryInfo] = useState({});
   const [tableData, setTablesData] = useState([]);
- /**  const [casesType, setCasesType] = useState("cases");
+  const [casesType, setCasesType] = useState("cases");
   const [mapCenter, setMapCenter] = useState({ lat: 34.80746, lng: -40.4796 }); /* the long and lat of the center of the world so when the app loadsit gos to center  */
-  /** const [mapZoom, setMapZoom] = useState(3);   to zoom to the center*/
+  const [mapZoom, setMapZoom] = useState(3); /**  to zoom to the center*/
+  const [mapCountries, setMapCountries] = useState([]);
 
 
     useEffect(() => {
@@ -76,7 +78,7 @@ function App() {
                         //storing all data from the contry response
               setCountryInfo(data); //this will store d contry info into a variable
 
-              setMapCenter ([data.countryInfo.lat, data.countryInfo,long]); // this allow the focus to be on the country selected in dropdown list e.g select usa and it will zoom to USA 
+              setMapCenter ([data.countryInfo.lat, data.countryInfo.long]); // this allow the focus to be on the country selected in dropdown list e.g select usa and it will zoom to USA 
               setMapZoom(4);
            });
     };

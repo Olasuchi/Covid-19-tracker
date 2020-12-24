@@ -8,7 +8,7 @@
   }
   
   /* giving the map height*/
-  
+
   .map .leaflet-container {
     height: 100%;
     border-radius: 12px;
@@ -19,6 +19,8 @@
     border-radius: 5px;
   }
   
+
+  /** styling the info descriptipn*/
   .info-name {
     font-size: 20px;
     font-weight: bold;
@@ -29,6 +31,7 @@
     width: 150px;
   }
   
+  /** to show flag at popup*/
   .info-flag {
     height: 80px;
     width: 100%;
