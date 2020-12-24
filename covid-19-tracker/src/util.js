@@ -1,3 +1,6 @@
+import { Circle, Popup } from "react-leaflet";
+
+
 export const sortData = (data) => {
     const sortedData = [...data];
 
@@ -9,4 +12,10 @@ export const sortData = (data) => {
         }
     })
     return sortedData;
+};
+
+//draw circles on the map with ineteractive tootip
+export const showDataOnMap = (data, casesType = 'cases') => {
+    const 
+    
 };

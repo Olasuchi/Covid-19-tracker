@@ -46,6 +46,7 @@ function App() {
 
           const sortedData = sortData(data);
           setTablesData(sortedData);
+          setMapCountries(data); // all info from the countries on the map 
           setCountries(countries);
 
         });
