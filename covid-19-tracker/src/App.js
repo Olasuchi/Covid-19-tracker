@@ -5,6 +5,7 @@ import Map from "./Map";
 import './App.css';
 import Table from "./Table";
 import { sortData } from "./util";
+import LineGraph from "./LineGraph"; 
 
 function App() {
   const [countries, setCountries] = useState([]);
@@ -114,7 +115,7 @@ function App() {
             <Table countries={tableData}></Table>
           <h3>Worldwide new cases</h3>
                           <LineGraph />
-              {/*Graph */}
+            
         </CardContent>
       </Card>
   </div>
