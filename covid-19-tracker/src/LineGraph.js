@@ -40,7 +40,7 @@ const options = {
                     },
 
                     ticks: {
-                        // Include a dollar sign in the ticks
+
                             callback: function (value, index, values) {
                                 return numeral(value).format("0a");
                             },
@@ -82,7 +82,7 @@ function LineGraph({ casesType = "cases"}) {
             .then((data) => {
               let chartData = buildChartData(data, casesType);
               setData(chartData);
-              
+              console.log(chartData);
               // buildChart(chartData);
             });
         };
@@ -93,7 +93,7 @@ function LineGraph({ casesType = "cases"}) {
 
   return (
     <div>
-      <h1>I am a Graph</h1>
+      <h1>Graph</h1>
       {data?.length > 0 && (
         <Line
           data={{

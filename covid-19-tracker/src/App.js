@@ -4,14 +4,14 @@ import InfoBox from './InfoBox';
 import Map from "./Map";
 import './App.css';
 import Table from "./Table";
-import { sortData } from "./util";
+import { sortData, prettyPrintStat } from "./util";
 import LineGraph from "./LineGraph"; 
 import "leaflet/dist/leaflet.css";
 import numeral from "numeral";
 
-function App() {
+function App () {
   const [countries, setCountries] = useState([]);
-  const [country, setInputCountry] = useState('worldwide'); //to set default frist option to worldwide
+  const [country, setInputCountry] = useState("worldwide"); //to set default frist option to worldwide
   const [countryInfo, setCountryInfo] = useState({});
   const [tableData, setTablesData] = useState([]);
   const [mapCountries, setMapCountries] = useState([]);
@@ -108,9 +108,29 @@ function App() {
       
 
           <div className="app_stats">
-            <InfoBox title="Coronavirus cases" cases={countryInfo.todayCases} total={countryInfo.cases}/>
-            <InfoBox title="Recovered" cases={countryInfo.todayRecovered} total={countryInfo.recovered}/>
-            <InfoBox title="Deaths" cases={countryInfo.todayDeaths} total={countryInfo.deaths}/>
+          <InfoBox
+            onClick={(e) => setCasesType("cases")}
+            title="Coronavirus Cases"
+            isRed
+            active={casesType === "cases"}
+            cases={prettyPrintStat(countryInfo.todayCases)}
+            total={numeral(countryInfo.cases).format("0.0a")}
+          />
+          <InfoBox
+            onClick={(e) => setCasesType("recovered")}
+            title="Recovered"
+            active={casesType === "recovered"}
+            cases={prettyPrintStat(countryInfo.todayRecovered)}
+            total={numeral(countryInfo.recovered).format("0.0a")}
+          />
+          <InfoBox
+            onClick={(e) => setCasesType("deaths")}
+            title="Deaths"
+            isRed
+            active={casesType === "deaths"}
+            cases={prettyPrintStat(countryInfo.todayDeaths)}
+            total={numeral(countryInfo.deaths).format("0.0a")}
+          />
           </div>
 
                           
@@ -124,17 +144,18 @@ function App() {
                   
       </div>
       
-  <Card className="app_right">
+      <Card className="app__right">
         <CardContent>
-          <h3>Live Cases by Country</h3>
-            <Table countries={tableData}></Table>
-          <h3>Worldwide new cases</h3>
-          <LineGraph casesType={casesType} />
-            
+          <div className="app__information">
+            <h3>Live Cases by Country</h3>
+            <Table countries={tableData} />
+            <h3>Worldwide new {casesType}</h3>
+            <LineGraph casesType={casesType} />
+          </div>
         </CardContent>
       </Card>
-  </div>
+    </div>
   );
-}
+};
 
 export default App;
