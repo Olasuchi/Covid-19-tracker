@@ -39,6 +39,7 @@ export const sortData = (data) => {
     return sortedData;
 };
 
+/*pretterPrintStat giving the numbers in a good fashion instead of writing the whole numbers out eg 123000 (+123k) */
 export const prettyPrintStat = (stat) =>
 stat ? `+${numeral(stat).format("0.0a")}` : "+0";
 

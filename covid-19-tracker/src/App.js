@@ -7,7 +7,7 @@ import Table from "./Table";
 import { sortData, prettyPrintStat } from "./util";
 import LineGraph from "./LineGraph"; 
 import "leaflet/dist/leaflet.css";
-import numeral from "numeral";
+//import numeral from "numeral";
 
 function App () {
   const [countries, setCountries] = useState([]);
@@ -114,14 +114,14 @@ function App () {
             isRed
             active={casesType === "cases"}
             cases={prettyPrintStat(countryInfo.todayCases)}
-            total={numeral(countryInfo.cases).format("0.0a")}
+            total={prettyPrintStat(countryInfo.cases)}//.format("0.0a")}
           />
           <InfoBox
             onClick={(e) => setCasesType("recovered")}
             title="Recovered"
             active={casesType === "recovered"}
             cases={prettyPrintStat(countryInfo.todayRecovered)}
-            total={numeral(countryInfo.recovered).format("0.0a")}
+            total={prettyPrintStat(countryInfo.recovered)}//.format("0.0a")}
           />
           <InfoBox
             onClick={(e) => setCasesType("deaths")}
@@ -129,7 +129,7 @@ function App () {
             isRed
             active={casesType === "deaths"}
             cases={prettyPrintStat(countryInfo.todayDeaths)}
-            total={numeral(countryInfo.deaths).format("0.0a")}
+            total={prettyPrintStat(countryInfo.deaths)}//.format("0.0a")}
           />
           </div>
 
