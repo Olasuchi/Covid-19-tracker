@@ -2,7 +2,7 @@ import React from "react";
 import numeral from "numeral";
 import { Circle, Popup } from "react-leaflet";
 
-
+//dictionary for different info  boxes this passes diff colors and popup on click
 const casesTypeColors = {
     cases: {
       hex: "#CC1034",
