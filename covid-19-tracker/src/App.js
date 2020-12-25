@@ -17,7 +17,7 @@ function App () {
   const [mapCountries, setMapCountries] = useState([]);
   const [casesType, setCasesType] = useState("cases");
   const [mapCenter, setMapCenter] = useState({ lat: 34.80746, lng: -40.4796 }); /* the long and lat of the center of the world so when the app loadsit gos to center  */
-  const [mapZoom, setMapZoom] = useState(3); /**  to zoom to the center*/
+  const [mapZoom, setMapZoom] = useState(2); /**  to zoom to the center*/
   
 
 
