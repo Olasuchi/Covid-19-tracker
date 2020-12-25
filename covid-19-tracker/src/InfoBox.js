@@ -6,7 +6,7 @@ function InfoBox({title, cases, total, active, isRed, ...props}) {
     console.log(title, active);
     return (
         <Card 
-        onClick={props.onClick}
+        onClick={props.onClick} //gives the card a clickable funtionality
         className={`infoBox ${active && "infoBox--selected"} ${
           isRed && "infoBox--red"
         }`}

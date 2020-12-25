@@ -79,7 +79,11 @@ function App () {
                         //storing all data from the contry response
               setCountryInfo(data); //this will store d contry info into a variable
 
-              setMapCenter ([data.countryInfo.lat, data.countryInfo.long]); // this allow the focus to be on the country selected in dropdown list e.g select usa and it will zoom to USA 
+              countryCode === "worldwide"
+          ? setMapCenter([34.80746, -40.4796])
+          : setMapCenter([data.countryInfo.lat, data.countryInfo.long]);
+
+              //setMapCenter ([data.countryInfo.lat, data.countryInfo.long]); // this allow the focus to be on the country selected in dropdown list e.g select usa and it will zoom to USA 
               setMapZoom(4);
            });
     };
@@ -135,8 +139,8 @@ function App () {
 
                           
           <Map
-          countries={mapCountries}
           casesType={casesType}  //to change the color of cases eg red to green if recovered 
+          countries={mapCountries}
           center={mapCenter}          
           zoom={mapZoom}
         />
@@ -144,13 +148,13 @@ function App () {
                   
       </div>
       
-      <Card className="app__right">
+      <Card className="app_right">
         <CardContent>
-          <div className="app__information">
+          <div className="app_information">
             <h3>Live Cases by Country</h3>
             <Table countries={tableData} />
             <h3>Worldwide new {casesType}</h3>
-            <LineGraph casesType={casesType} />
+            <LineGraph className="app_graph" casesType={casesType} />
           </div>
         </CardContent>
       </Card>
