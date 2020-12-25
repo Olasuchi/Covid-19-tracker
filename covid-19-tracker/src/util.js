@@ -5,18 +5,25 @@ import { Circle, Popup } from "react-leaflet";
 //dictionary for different info  boxes this passes diff colors and popup on click
 const casesTypeColors = {
   cases: {
+    hex: "#CC1034",
+    rgb: "rgb(204, 16, 52)",
+    half_op: "rgba(204, 16, 52, 0.5)",
     multiplier: 800,
-    option: { color:"#cc1034", fillColor: "#cc1034" },
   },
   recovered: {
+    hex: "#7dd71d",
+    rgb: "rgb(125, 215, 29)",
+    half_op: "rgba(125, 215, 29, 0.5)",
     multiplier: 1200,
-    option: { color:"#7dd71d", fillColor: "#7dd71d" },
   },
   deaths: {
+    hex: "#fb4443",
+    rgb: "rgb(251, 68, 67)",
+    half_op: "rgba(251, 68, 67, 0.5)",
     multiplier: 2000,
-    option: { color:"#ff6c47", fillColor: "#ff6c47" }
   },
 };
+
   
 
 
@@ -42,10 +49,11 @@ export const showDataOnMap = (data, casesType = "cases") =>
   data.map((country) => (
     <Circle
     center={[country.countryInfo.lat, country.countryInfo.long]}
-    fillOpacity={0.4}
-    pathOptions={casesTypeColors[casesType].option}
-    radius={
-      Math.sqrt(country[casesType]) * casesTypeColors[casesType].multiplier
+      color={casesTypeColors[casesType].hex}
+      fillColor={casesTypeColors[casesType].hex} 
+      fillOpacity={0.4} // for the circles to be transparent 
+      radius={
+        Math.sqrt(country[casesType]) * casesTypeColors[casesType].multiplier
     }
        // radius of cirlce
       >
