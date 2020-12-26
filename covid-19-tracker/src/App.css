@@ -3,13 +3,13 @@
 }
 
 body{
-  background-color:#f5f6fa;
+  background-color:#B4B8AB;
 }
 
 .app{
   display: flex;
   justify-content: space-evenly;
-  background-color: #f5f6fa;
+  background-color: #B4B8AB;
   padding: 20px;
 }
 
@@ -74,9 +74,77 @@ body{
   margin-bottom: 2rem;
 }
 
-
 @media (max-width: 990px) {
   .app {
     flex-direction: column;
   }
+
+  .app_right {
+    display: flex;
+    margin-top: 10px;
+  }
+}
+
+
+@media only screen and (max-width: 750px){
+  .app_stats{
+      flex-direction: column;
+  }
+  .InfoBox {
+      display: initial;
+      flex-grow: 1;
+  }
+
+  .app_right {
+    display: flex;
+    margin-top: 10px;
+  }
+
+
+  .infoBox:not(:last-child) {
+    margin-right: 0px;
+    margin-top: 5px;
+  }
+
+  .infoBox:not(:first-child) {
+    margin-top: 5px;
+  }
+
+  }
+
+  @media (max-width: 320px) {
+    .app_stats{
+      flex-direction: column;
+  }
+  .InfoBox {
+    display: initial;
+    flex-grow: 1;
+}
+
+.app_right {
+  display: flex;
+  margin-top: 10px;
+}
+
+.table {
+  margin-right: 10px;
+}
+
+
+.infoBox:not(:last-child) {
+  margin-right: 0px;
+  margin-top: 5px;
+}
+
+.infoBox:not(:first-child) {
+  margin-top: 5px;
+}
+
+.app_graph {
+  flex-grow: 0.1;
+  margin-bottom: 0%;
+  height: 27%;
+  width: 92%;
+}
+
 }
