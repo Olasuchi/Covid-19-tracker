@@ -9,7 +9,7 @@
     "@testing-library/user-event": "^12.6.0",
     "axios": "^0.21.1",
     "chart.js": "^2.9.4",
-    "firebase": "^8.2.1",
+    "firebase": "https://covid-19-tracker-de219.web.app",
     "leaflet": "^1.6.0",
     "numeral": "^2.0.6",
     "react": "^17.0.1",
