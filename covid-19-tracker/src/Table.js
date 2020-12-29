@@ -13,7 +13,9 @@ function Table({ countries }) {
               </td>
             </tr>
           ))}
+
         </div>
+        
       );
     }
 

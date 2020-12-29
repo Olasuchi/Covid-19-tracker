@@ -7,7 +7,8 @@ import Table from "./Table";
 import { sortData, prettyPrintStat } from "./util";
 import LineGraph from "./LineGraph"; 
 import "leaflet/dist/leaflet.css";
-//import numeral from "numeral";
+//import { Line } from "react-chartjs-2";
+
 
 function App () {
   const [countries, setCountries] = useState([]);
@@ -17,9 +18,8 @@ function App () {
   const [mapCountries, setMapCountries] = useState([]);
   const [casesType, setCasesType] = useState("cases");
   const [mapCenter, setMapCenter] = useState({ lat: 34.80746, lng: -40.4796 }); /* the long and lat of the center of the world so when the app loadsit gos to center  */
-  const [mapZoom, setMapZoom] = useState(4); /**  to zoom to the center*/
-  
-
+  const [mapZoom, setMapZoom] = useState(3); /**  to zoom to the center*/
+ 
 
     useEffect(() => {
       fetch ("https://disease.sh/v3/covid-19/all")
@@ -33,12 +33,12 @@ function App () {
                 // https://disease.sh/v3/covid-19/countries
                 //USEEFFECT= Use to pull data from api. runs a piece of code based on given condition
 
-    useEffect(() => {
+    
                 //note when u live [] blank the code inside here will run only once whn d components loads ie if u av data in the countries varaible when there is changes in the data it wil only run once 
                // we need to run a piece of code -> async -> sends a request to server and wait for it and fo somtin wit d info. how to use is below 
-
+               useEffect(() => {
       const getCountriesData= async () => {
-        await fetch("https://disease.sh/v3/covid-19/countries")
+        await fetch("https://disease.sh/v3/covid-19/countries?twoDaysAgo=true ")
         .then((response) => response.json())
         .then ((data) => {
           const countries = data.map ((country) => (
@@ -46,7 +46,6 @@ function App () {
               name: country.country, //Unites States, United Kingdom
               value: country.countryInfo.iso2 // UK, USA, FRA
           }));
-
           const sortedData = sortData(data);
           setTablesData(sortedData);
           setMapCountries(data); // all info from the countries on the map 
@@ -57,7 +56,8 @@ function App () {
 
       getCountriesData();
     }, []);
-    console.log(casesType)
+
+
 
     const onCountryChange = async (event) => {
       const countryCode = event.target.value; 
@@ -84,12 +84,15 @@ function App () {
           : setMapCenter([data.countryInfo.lat, data.countryInfo.long]);
 
               //setMapCenter ([data.countryInfo.lat, data.countryInfo.long]); // this allow the focus to be on the country selected in dropdown list e.g select usa and it will zoom to USA 
-              setMapZoom(4);
+              setMapZoom(3);
            });
+
+
     };
 
   return (
     <div className="app">
+     
       <div className="app_left">
         <div className="app_header">
           <h1> COVID-19 TRACKER</h1>
@@ -145,9 +148,15 @@ function App () {
           zoom={mapZoom}
         />
 
+{/* trying to creat vaccine table under the map */}
+       
+
                   
       </div>
       
+   
+
+
       <Card className="app_right">
         <CardContent>
           <div className="app_information">
@@ -156,8 +165,13 @@ function App () {
             <h3>Worldwide new {casesType}</h3>
             <LineGraph className="app_graph" casesType={casesType} />
           </div>
-        </CardContent>
+
+          
+      
+
+          </CardContent> 
       </Card>
+ 
     </div>
   );
 };
