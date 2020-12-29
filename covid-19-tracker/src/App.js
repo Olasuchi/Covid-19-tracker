@@ -7,7 +7,7 @@ import Table from "./Table";
 import { sortData, prettyPrintStat } from "./util";
 import LineGraph from "./LineGraph"; 
 import "leaflet/dist/leaflet.css";
-//import { Line } from "react-chartjs-2";
+
 
 
 function App () {
